@@ -1,0 +1,403 @@
+{% extends "base.html" %}
+{% block title %}{{ t.projetos }} - Especialista IA{% endblock %}
+
+{% block extra_css %}
+<style>
+.page-header {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    padding: 6rem 2rem 4rem;
+    text-align: center;
+    color: #fff;
+}
+.page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+.page-header p { font-size: 1.2rem; color: #64748b; }
+
+.projetos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #6366f1;
+    background: transparent;
+    color: #6366f1;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+.filter-btn:hover,
+.filter-btn.active {
+    background: #6366f1;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+}
+.project-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.5s;
+}
+.project-card:hover .project-image::before { left: 100%; }
+
+.project-content { padding: 1.5rem; }
+.project-content h3 { font-size: 1.5rem; color: #0f172a; margin-bottom: 0.5rem; }
+.project-content p { color: #64748b; margin-bottom: 1rem; line-height: 1.6; }
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.tag {
+    padding: 0.25rem 0.75rem;
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.badge-n8n,
+.badge-github {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem; /* Espaçamento extra abaixo */
+    font-weight: 600;
+}
+.badge-n8n { background: #ff6d6d; color: #fff; }
+.badge-github { background: #0f172a; color: #fff; }
+
+.btn-detail {
+    width: 100%;
+    padding: 0.75rem;
+    background: #6366f1;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+.btn-detail:hover { background: #4f46e5; transform: translateY(-2px); }
+
+/* ================= MODAL ================= */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    overflow-y: auto;
+}
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 24px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    padding: 3rem 2rem 2rem;
+    color: #fff;
+    position: relative;
+}
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.modal-icon { font-size: 4rem; margin-bottom: 1rem; }
+.modal-header h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+
+.modal-body { padding: 2rem; }
+.modal-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+.modal-section h3 {
+    font-size: 1.3rem;
+    color: #0f172a;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.modal-section h3::before { content: '▸'; color: #6366f1; font-size: 1.5rem; }
+.modal-section p { font-size: 1.1rem; line-height: 1.8; color: #64748b; }
+.modal-section ul { margin-top: 1rem; padding-left: 1.5rem; }
+.modal-section li { color: #64748b; margin-bottom: 0.5rem; line-height: 1.6; }
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.tech-item {
+    padding: 1rem;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: #6366f1;
+    transition: all 0.3s;
+}
+.tech-item:hover { background: #6366f1; color: #fff; transform: translateY(-3px); }
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .page-header h1 { font-size: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .modal-content { margin: 1rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>{{ t.meus_projetos }}</h1>
+    <p>{{ t.colecao_trabalhos }}</p>
+</section>
+
+<div class="projetos-container">
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">{{ t.filtro_todos }}</button>
+        <button class="filter-btn" data-filter="ia">{{ t.filtro_ia }}</button>
+        <button class="filter-btn" data-filter="automacao">{{ t.filtro_automacao }}</button>
+        <button class="filter-btn" data-filter="web">{{ t.filtro_web }}</button>
+    </div>
+
+    <div class="projects-grid">
+        {% for projeto in projetos %}
+        <div class="project-card" data-categories="{{ projeto.categoria|join(',') }}">
+            <div class="project-image">{{ projeto.icone }}</div>
+            <div class="project-content">
+                <h3>{{ projeto.titulo }}</h3>
+                <p>{{ projeto.descricao }}</p>
+                <div class="project-tags">
+                    {% for tech in projeto.tecnologias[:3] %}
+                    <span class="tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                {% if projeto.tipo == 'n8n' %}
+                <span class="badge-n8n">N8N Workflow</span>
+                {% else %}
+                <span class="badge-github">GitHub</span>
+                {% endif %}
+                <button class="btn-detail" onclick="openModal({{ projeto.id }})">{{ t.ver_detalhes }} →</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="projectModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-icon" id="modalIcon"></div>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc"></p>
+        </div>
+        <div class="modal-body">
+            <div class="modal-section">
+                <h3>{{ t.problema_resolvido }}</h3>
+                <p id="modalProblema"></p>
+            </div>
+            <div class="modal-section">
+                <h3>{{ t.solucao_implementada }}</h3>
+                <p id="modalSolucao"></p>
+            </div>
+            <div class="modal-section">
+                <h3>{{ t.resultados }}</h3>
+                <p id="modalResultados"></p>
+            </div>
+            <div class="modal-section">
+                <h3>{{ t.principais_funcionalidades }}</h3>
+                <ul id="modalFunc"></ul>
+            </div>
+            <div class="modal-section">
+                <h3>{{ t.como_funciona }}</h3>
+                <p id="modalComo"></p>
+            </div>
+            <div class="modal-section">
+                <h3>{{ t.tecnologias }}</h3>
+                <div class="tech-grid" id="modalTech"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const projetos = JSON.parse(`{{ projetos | tojson | safe }}`);
+
+// === Filtro de categorias ===
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const filter = this.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            const categories = card.dataset.categories.split(',');
+            if (filter === 'all' || categories.includes(filter)) {
+                card.style.display = 'block';
+                card.style.animation = 'slideUp .6s ease-out';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+
+// === Modal ===
+function openModal(id) {
+    const p = projetos.find(proj => proj.id === id);
+    if (!p) return;
+
+    // Preenche o conteúdo do modal
+    document.getElementById('modalIcon').textContent = p.icone;
+    document.getElementById('modalTitle').textContent = p.titulo;
+    document.getElementById('modalDesc').textContent = p.descricao_longa;
+    document.getElementById('modalProblema').textContent = p.problema;
+    document.getElementById('modalSolucao').textContent = p.solucao;
+    document.getElementById('modalResultados').textContent = p.resultados;
+
+    const funcList = document.getElementById('modalFunc');
+    funcList.innerHTML = p.funcionalidades.map(f => `<li>${f}</li>`).join('');
+
+    document.getElementById('modalComo').textContent = p.como_funciona;
+
+    const techGrid = document.getElementById('modalTech');
+    techGrid.innerHTML = p.tecnologias.map(t => `<div class="tech-item">${t}</div>`).join('');
+
+    // Exibe o modal
+    const modal = document.getElementById('projectModal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // ✅ Após mostrar o modal, garante que o scroll comece do topo
+    const modalContent = document.querySelector(".modal-content");
+    setTimeout(() => {
+        if (modalContent) modalContent.scrollTop = 0;
+    }, 100);
+}
+
+function closeModal() {
+    const modal = document.getElementById('projectModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+
+    // ✅ Quando fechar, reseta o scroll interno
+    const modalContent = document.querySelector(".modal-content");
+    if (modalContent) {
+        modalContent.scrollTop = 0;
+    }
+}
+
+
+
+
+function closeModal() {
+    document.getElementById('projectModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Fecha o modal ao clicar fora ou apertar ESC
+document.getElementById('projectModal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+});
+</script>
+{% endblock %}

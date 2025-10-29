@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+
+{% block title %}Sobre - Desenvolvedor Full Stack{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-header {
+        background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        color: white;
+    }
+
+    .page-header h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .sobre-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    .sobre-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-bottom: 4rem;
+    }
+
+    .sobre-image {
+        position: relative;
+        text-align: center;
+    }
+
+    .foto-perfil {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 6px solid #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        display: block;
+        margin: 0 auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .foto-perfil:hover {
+        transform: scale(1.03);
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+    }
+
+    .sobre-text h2 {
+        font-size: 2.5rem;
+        color: var(--dark);
+        margin-bottom: 1rem;
+    }
+
+    .sobre-text p {
+        color: var(--gray);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 4rem 0;
+    }
+
+    .stat-card {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stat-label {
+        color: var(--gray);
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+    }
+
+    .skills-section {
+        background: var(--light);
+        padding: 4rem 2rem;
+        margin: 0 -2rem;
+    }
+
+    .skills-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .skills-section h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+
+    .skill-category {
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-category h3 {
+        font-size: 1.5rem;
+        color: var(--dark);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .skill-category h3::before {
+        content: '▸';
+        color: var(--primary);
+        font-size: 1.8rem;
+    }
+
+    .skill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .skill-item {
+        padding: 0.5rem 1rem;
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--primary);
+        border-radius: 25px;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .skill-item:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    @media (max-width: 768px) {
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .sobre-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .sobre-text h2 {
+            font-size: 2rem;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .skills-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>Sobre Mim</h1>
+    <p>Conheça minha trajetória e habilidades</p>
+</section>
+
+<div class="sobre-container">
+    <div class="sobre-grid fade-in">
+        <div class="sobre-image">
+            <img src="{{ url_for('static', filename='images/foto-jorge.jpg') }}" 
+                 alt="Foto de Jorge Henrique" 
+                 class="foto-perfil">
+        </div>
+        <div class="sobre-text">
+            <h2>Desenvolvedor Full Stack movido por desafios e resultados</h2>
+            <p>Sou desenvolvedor full stack com foco em criar soluções inteligentes e automatizadas que realmente geram impacto. Trabalho com Python, Flask, FastAPI e integrações que conectam sistemas, pessoas e resultados.</p>
+            <p>Minha trajetória começou com curiosidade e virou propósito: transformar ideias em produtos reais, funcionais e escaláveis.</p>
+            <p>Valorizo código limpo, eficiência e aprendizado constante — porque tecnologia boa é aquela que resolve de forma simples o que parecia complicado.</p>
+        </div>
+    </div>
+
+    <div class="stats-grid fade-in">
+        <div class="stat-card">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">Projetos Concluídos</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Anos de Experiência</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Tecnologias Dominadas</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Projetos Entregues com Sucesso</div>
+        </div>
+    </div>
+</div>
+
+<section class="skills-section">
+    <div class="skills-container">
+        <h2 class="fade-in">Minhas Habilidades</h2>
+        <div class="skills-grid">
+            {% for categoria, skills in habilidades.items() %}
+            <div class="skill-category fade-in" style="animation-delay: {{ loop.index0 * 0.1 }}s">
+                <h3>{{ categoria }}</h3>
+                <div class="skill-list">
+                    {% for skill in skills %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const habilidades = JSON.parse('{{ habilidades | tojson | safe }}');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.stat-card, .skill-category').forEach(el => {
+        observer.observe(el);
+    });
+</script>
+{% endblock %}

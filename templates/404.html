@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Página Não Encontrada - 404{% endblock %}
+
+{% block extra_css %}
+<style>
+    .error-container {
+        min-height: calc(100vh - 150px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    }
+
+    .error-content {
+        text-align: center;
+        color: white;
+    }
+
+    .error-code {
+        font-size: 10rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+
+    .error-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .error-message {
+        font-size: 1.2rem;
+        color: var(--gray);
+        margin-bottom: 2rem;
+    }
+
+    .error-svg {
+        max-width: 400px;
+        margin: 2rem auto;
+        filter: drop-shadow(0 20px 40px rgba(99, 102, 241, 0.3));
+    }
+
+    .btn-home {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-home:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .error-svg {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @media (max-width: 768px) {
+        .error-code {
+            font-size: 6rem;
+        }
+
+        .error-title {
+            font-size: 1.8rem;
+        }
+
+        .error-message {
+            font-size: 1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-content">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Página Não Encontrada</h1>
+        <p class="error-message">Ops! A página que você está procurando não existe.</p>
+        
+        <div class="error-svg">
+            <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="grad404" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                
+                <!-- Planeta/Lua -->
+                <circle cx="250" cy="150" r="100" fill="url(#grad404)" opacity="0.2"/>
+                <circle cx="250" cy="150" r="80" fill="url(#grad404)" opacity="0.4"/>
+                <circle cx="250" cy="150" r="60" fill="url(#grad404)"/>
+                
+                <!-- Crateras -->
+                <circle cx="230" cy="130" r="15" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="270" cy="140" r="10" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="250" cy="170" r="12" fill="rgba(255,255,255,0.2)"/>
+                
+                <!-- Astronauta -->
+                <g transform="translate(350, 100)">
+                    <!-- Corpo -->
+                    <ellipse cx="0" cy="30" rx="20" ry="30" fill="white"/>
+                    <!-- Cabeça -->
+                    <circle cx="0" cy="0" r="20" fill="white" opacity="0.8"/>
+                    <circle cx="0" cy="0" r="15" fill="url(#grad404)" opacity="0.3"/>
+                    <!-- Braços -->
+                    <rect x="-25" y="15" width="10" height="30" rx="5" fill="white" transform="rotate(-20 -20 30)"/>
+                    <rect x="15" y="15" width="10" height="30" rx="5" fill="white" transform="rotate(20 20 30)"/>
+                    <!-- Pernas -->
+                    <rect x="-12" y="55" width="10" height="25" rx="5" fill="white"/>
+                    <rect x="2" y="55" width="10" height="25" rx="5" fill="white"/>
+                </g>
+                
+                <!-- Estrelas -->
+                <circle cx="50" cy="50" r="2" fill="white"/>
+                <circle cx="450" cy="80" r="2" fill="white"/>
+                <circle cx="100" cy="250" r="2" fill="white"/>
+                <circle cx="400" cy="220" r="2" fill="white"/>
+                <circle cx="150" cy="100" r="2" fill="white"/>
+            </svg>
+        </div>
+        
+        <a href="/" class="btn-home">Voltar para Home</a>
+    </div>
+</div>
+{% endblock %}
