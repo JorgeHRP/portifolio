@@ -16,14 +16,14 @@ PROJETOS = [
         "id": 1,
         "destaque": True,
         "titulo": "Automação de Atendimento via WhatsApp",
-        "descricao": "Sistema de atendimento automático integrado com Evolution API. Backend em Python com sessão persistente, health check e deploy em nuvem.",
+        "descricao": "Sistema de atendimento automático integrado com API Oficial. Backend em Python com sessão persistente, health check e deploy em nuvem.",
         "descricao_longa": "Sistema completo de atendimento via WhatsApp usando a principal API open-source do mercado. O bot mantém contexto da conversa, responde de forma humanizada e nunca cai — sessão persistente com reconexão automática e health check monitorado 24/7.",
         "problema": "O cliente perdia leads fora do horário comercial. Sem atendimento automático, mensagens ficavam sem resposta por horas.",
-        "solucao": "Bot Python com Telethon + Evolution API rodando 24/7 em nuvem. Sessão persistente, reconexão automática, health check e deploy no Railway com zero downtime.",
+        "solucao": "Bot Python com Telethon + API Oficial rodando 24/7 em nuvem. Sessão persistente, reconexão automática, health check e deploy no Railway com zero downtime.",
         "resultado": "Zero leads perdidos fora do horário comercial. Atendimento instantâneo 24/7.",
-        "funcionalidades": ["Atendimento 24/7", "Sessão persistente", "Health check", "Deploy Railway", "Logs estruturados", "Evolution API"],
+        "funcionalidades": ["Atendimento 24/7", "Sessão persistente", "Health check", "Deploy Railway", "Logs estruturados", "API Oficial"],
         "como_funciona": "Mensagem chega → Bot processa → Responde → Loga → Monitora",
-        "tecnologias": ["Python", "Telethon", "Flask", "Evolution API", "Railway"],
+        "tecnologias": ["Python", "Telethon", "Flask", "API Oficial", "Railway"],
         "imagem": "proj-whatsapp.jpg",
         "categoria": ["automacao", "ia"],
         "github": "https://github.com/JorgeHRP"
@@ -189,14 +189,14 @@ MAIS_PROJETOS = [
     {
         "titulo": "Sistema de Disparo em Massa",
         "descricao": "Módulo de disparo de mensagens segmentadas via WhatsApp com controle de cadência e relatório de entrega.",
-        "tecnologias": ["Python", "Evolution API", "Flask"],
+        "tecnologias": ["Python", "API Oficial", "Flask"],
         "categoria": ["automacao", "ia"],
     },
 ]
 
 HABILIDADES = {
     "Inteligência Artificial": ["OpenAI GPT-4", "Claude AI", "Machine Learning", "Computer Vision", "NLP"],
-    "Automação":               ["Evolution API", "Webhooks", "Bots WhatsApp", "Bots Telegram", "Telethon"],
+    "Automação":               ["API Oficial WhatsApp", "Webhooks", "Bots WhatsApp", "Bots Telegram", "Telethon"],
     "Backend":                 ["Python", "Flask", "FastAPI", "AsyncIO", "Supabase"],
     "Frontend":                ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
     "Ferramentas":             ["Git", "Docker", "Railway", "Pandas", "REST APIs"]
