@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}{{ t.priv_titulo }} — Desenvolvedor Full Stack{% endblock %}
+
+{% block content %}
+
+<section style="background:var(--dark-2); border-bottom:1px solid var(--border); padding:5rem 0 3rem;">
+  <div class="container">
+    <span class="section-label">// legal</span>
+    <h1>{{ t.priv_titulo }}</h1>
+    <p class="section-desc">{{ t.priv_atualizado }}</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container container--narrow">
+    <div style="display:flex; flex-direction:column; gap:2.5rem;">
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_responsavel }}</h2>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <p style="margin:0;"><strong style="color:var(--text);">{{ t.priv_razao_social }}:</strong> Jorge Henrique Ribeiro do Prado</p>
+          <p style="margin:0;"><strong style="color:var(--text);">CNPJ:</strong> 48.841.065/0001-96</p>
+          <p style="margin:0;"><strong style="color:var(--text);">{{ t.priv_localizacao }}:</strong> Porto, Portugal</p>
+          <p style="margin:0;"><strong style="color:var(--text);">Email:</strong> <a href="mailto:jorgeprado.contato@outlook.com" style="color:var(--primary-light);">jorgeprado.contato@outlook.com</a></p>
+        </div>
+      </div>
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_que_dados }}</h2>
+        <p style="margin-bottom:1rem;">{{ t.priv_que_dados_intro }}</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="skill-item">{{ t.priv_dado_nome }}</div>
+          <div class="skill-item">{{ t.priv_dado_email }}</div>
+          <div class="skill-item">{{ t.priv_dado_mensagem }}</div>
+          <div class="skill-item">{{ t.priv_dado_data }}</div>
+        </div>
+        <p style="margin-top:1rem; font-size:0.88rem;">{{ t.priv_que_dados_rodape }}</p>
+      </div>
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_como_usamos }}</h2>
+        <p style="margin-bottom:1rem;">{{ t.priv_como_usamos_intro }}</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="skill-item">{{ t.priv_uso_1 }}</div>
+          <div class="skill-item">{{ t.priv_uso_2 }}</div>
+          <div class="skill-item">{{ t.priv_uso_3 }}</div>
+        </div>
+        <p style="margin-top:1rem; font-size:0.88rem;">{{ t.priv_como_usamos_rodape }}</p>
+      </div>
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_base_legal }}</h2>
+        <p>{{ t.priv_base_legal_texto }}</p>
+      </div>
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_partilha }}</h2>
+        <p style="margin-bottom:1rem;">{{ t.priv_partilha_intro }}</p>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:1rem;">
+          <div class="skill-item">{{ t.priv_partilha_webhook }}</div>
+          <div class="skill-item">{{ t.priv_partilha_whatsapp }}</div>
+        </div>
+        <p style="font-size:0.88rem;">{{ t.priv_partilha_rodape }}</p>
+      </div>
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_retencao }}</h2>
+        <p>{{ t.priv_retencao_texto }}</p>
+      </div>
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_direitos }}</h2>
+        <p style="margin-bottom:1rem;">{{ t.priv_direitos_intro }}</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div class="skill-item">{{ t.priv_direito_1 }}</div>
+          <div class="skill-item">{{ t.priv_direito_2 }}</div>
+          <div class="skill-item">{{ t.priv_direito_3 }}</div>
+          <div class="skill-item">{{ t.priv_direito_4 }}</div>
+          <div class="skill-item">{{ t.priv_direito_5 }}</div>
+          <div class="skill-item">{{ t.priv_direito_6 }}</div>
+        </div>
+        <p style="margin-top:1rem; font-size:0.88rem;">
+          {{ t.priv_direitos_rodape }}
+          <a href="mailto:jorgeprado.contato@outlook.com" style="color:var(--primary-light);">jorgeprado.contato@outlook.com</a>
+        </p>
+      </div>
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_seguranca }}</h2>
+        <p>{{ t.priv_seguranca_texto }}</p>
+      </div>
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_alteracoes }}</h2>
+        <p>{{ t.priv_alteracoes_texto }}</p>
+      </div>
+
+      <div class="card card-pad">
+        <h2 style="font-size:1.2rem; margin-bottom:1rem;">{{ t.priv_autoridade }}</h2>
+        <p>{{ t.priv_autoridade_texto }}</p>
+      </div>
+
+      <div style="text-align:center; padding-top:1rem;">
+        <a href="/cookies" class="btn btn-ghost btn-sm" style="margin-right:0.75rem;">{{ t.priv_ver_cookies }}</a>
+        <a href="/home" class="btn btn-primary btn-sm">{{ t.priv_voltar }}</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

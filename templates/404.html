@@ -1,148 +1,68 @@
 {% extends "base.html" %}
-
-{% block title %}Página Não Encontrada - 404{% endblock %}
-
-{% block extra_css %}
-<style>
-    .error-container {
-        min-height: calc(100vh - 150px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
-    }
-
-    .error-content {
-        text-align: center;
-        color: white;
-    }
-
-    .error-code {
-        font-size: 10rem;
-        font-weight: bold;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        line-height: 1;
-        margin-bottom: 1rem;
-    }
-
-    .error-title {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .error-message {
-        font-size: 1.2rem;
-        color: var(--gray);
-        margin-bottom: 2rem;
-    }
-
-    .error-svg {
-        max-width: 400px;
-        margin: 2rem auto;
-        filter: drop-shadow(0 20px 40px rgba(99, 102, 241, 0.3));
-    }
-
-    .btn-home {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: all 0.3s;
-        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-    }
-
-    .btn-home:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
-    }
-
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-20px);
-        }
-    }
-
-    .error-svg {
-        animation: float 3s ease-in-out infinite;
-    }
-
-    @media (max-width: 768px) {
-        .error-code {
-            font-size: 6rem;
-        }
-
-        .error-title {
-            font-size: 1.8rem;
-        }
-
-        .error-message {
-            font-size: 1rem;
-        }
-    }
-</style>
-{% endblock %}
+{% block title %}404 — Página não encontrada{% endblock %}
 
 {% block content %}
-<div class="error-container">
-    <div class="error-content">
-        <div class="error-code">404</div>
-        <h1 class="error-title">Página Não Encontrada</h1>
-        <p class="error-message">Ops! A página que você está procurando não existe.</p>
-        
-        <div class="error-svg">
-            <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="grad404" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                
-                <!-- Planeta/Lua -->
-                <circle cx="250" cy="150" r="100" fill="url(#grad404)" opacity="0.2"/>
-                <circle cx="250" cy="150" r="80" fill="url(#grad404)" opacity="0.4"/>
-                <circle cx="250" cy="150" r="60" fill="url(#grad404)"/>
-                
-                <!-- Crateras -->
-                <circle cx="230" cy="130" r="15" fill="rgba(255,255,255,0.2)"/>
-                <circle cx="270" cy="140" r="10" fill="rgba(255,255,255,0.2)"/>
-                <circle cx="250" cy="170" r="12" fill="rgba(255,255,255,0.2)"/>
-                
-                <!-- Astronauta -->
-                <g transform="translate(350, 100)">
-                    <!-- Corpo -->
-                    <ellipse cx="0" cy="30" rx="20" ry="30" fill="white"/>
-                    <!-- Cabeça -->
-                    <circle cx="0" cy="0" r="20" fill="white" opacity="0.8"/>
-                    <circle cx="0" cy="0" r="15" fill="url(#grad404)" opacity="0.3"/>
-                    <!-- Braços -->
-                    <rect x="-25" y="15" width="10" height="30" rx="5" fill="white" transform="rotate(-20 -20 30)"/>
-                    <rect x="15" y="15" width="10" height="30" rx="5" fill="white" transform="rotate(20 20 30)"/>
-                    <!-- Pernas -->
-                    <rect x="-12" y="55" width="10" height="25" rx="5" fill="white"/>
-                    <rect x="2" y="55" width="10" height="25" rx="5" fill="white"/>
-                </g>
-                
-                <!-- Estrelas -->
-                <circle cx="50" cy="50" r="2" fill="white"/>
-                <circle cx="450" cy="80" r="2" fill="white"/>
-                <circle cx="100" cy="250" r="2" fill="white"/>
-                <circle cx="400" cy="220" r="2" fill="white"/>
-                <circle cx="150" cy="100" r="2" fill="white"/>
-            </svg>
-        </div>
-        
-        <a href="/" class="btn-home">Voltar para Home</a>
+
+<section style="min-height:calc(100vh - 68px); display:flex; align-items:center; justify-content:center; padding:4rem 0;">
+  <div class="container" style="text-align:center;">
+
+    <!-- Número 404 -->
+    <div style="font-family:var(--font-head); font-size:clamp(6rem,18vw,12rem); font-weight:800;
+                line-height:1; letter-spacing:-0.05em; margin-bottom:1.5rem;
+                background:var(--grad-primary); -webkit-background-clip:text;
+                -webkit-text-fill-color:transparent; background-clip:text;
+                opacity:0.25;">
+      404
     </div>
-</div>
+
+    <!-- Terminal card -->
+    <div style="max-width:480px; margin:0 auto 3rem; background:var(--dark-2);
+                border:1px solid var(--border-2); border-radius:var(--radius-lg);
+                overflow:hidden; box-shadow:var(--shadow-lg);">
+      <!-- Bar -->
+      <div style="display:flex; align-items:center; gap:8px; padding:12px 16px;
+                  border-bottom:1px solid var(--border); background:var(--dark-3);">
+        <span style="width:10px;height:10px;border-radius:50%;background:#ef4444;"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#10b981;"></span>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-3);margin-left:8px;">terminal</span>
+      </div>
+      <!-- Content -->
+      <div style="padding:1.5rem; font-family:var(--font-mono); font-size:0.82rem; line-height:2; text-align:left;">
+        <div><span style="color:var(--primary-light);">$</span> <span style="color:var(--text-2);">GET</span> <span style="color:var(--text);">{{ request.path }}</span></div>
+        <div><span style="color:#ef4444;">Error 404:</span> <span style="color:var(--text-2);">route not found</span></div>
+        <div><span style="color:var(--text-3);"># Esta página não existe.</span></div>
+        <div style="margin-top:0.5rem;">
+          <span style="color:var(--primary-light);">$</span>
+          <span style="color:var(--text-2);"> cd </span>
+          <span style="color:#10b981;">/home</span>
+          <span style="display:inline-block; width:8px; height:14px; background:var(--primary-light); margin-left:2px; animation:blink 1s infinite;"></span>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="font-size:1.5rem; margin-bottom:0.75rem;">{{ t.pagina_nao_encontrada }}</h2>
+    <p style="color:var(--text-2); margin-bottom:2.5rem; max-width:360px; margin-left:auto; margin-right:auto;">
+      {{ t.ops_pagina }}
+    </p>
+
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="/home" class="btn btn-primary btn-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        {{ t.voltar_home }}
+      </a>
+      <a href="/projetos" class="btn btn-ghost">{{ t.projetos }}</a>
+      <a href="/contato" class="btn btn-ghost">{{ t.contato }}</a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+
 {% endblock %}

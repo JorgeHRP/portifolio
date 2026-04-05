@@ -1,273 +1,124 @@
 {% extends "base.html" %}
-
-{% block title %}{{ t.inicio }} - Desenvolvedor Full Stack{% endblock %}
-
-{% block extra_css %}
-<style>
-    .hero {
-        min-height: calc(100vh - 70px);
-        background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%236366f1" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,96C1248,75,1344,53,1392,42.7L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
-        background-size: cover;
-        opacity: 0.3;
-    }
-
-    .hero-content {
-        max-width: 1200px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: center;
-        z-index: 1;
-    }
-
-    .hero-text h1 {
-        font-size: 3.5rem;
-        color: white;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-    }
-
-    .gradient-text {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .hero-text p {
-        font-size: 1.25rem;
-        color: var(--gray);
-        margin-bottom: 2rem;
-    }
-
-    .hero-buttons {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .btn {
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
-    }
-
-    .btn-secondary {
-        background: transparent;
-        color: white;
-        border: 2px solid var(--primary);
-    }
-
-    .btn-secondary:hover {
-        background: var(--primary);
-    }
-
-    .hero-image svg {
-        width: 100%;
-        height: auto;
-        filter: drop-shadow(0 20px 40px rgba(99, 102, 241, 0.3));
-    }
-
-    .featured-projects {
-        padding: 6rem 2rem;
-        background: var(--light);
-    }
-
-    .section-header {
-        text-align: center;
-        margin-bottom: 4rem;
-    }
-
-    .section-header h2 {
-        font-size: 2.5rem;
-        color: var(--dark);
-        margin-bottom: 1rem;
-    }
-
-    .section-header p {
-        font-size: 1.1rem;
-        color: var(--gray);
-    }
-
-    .projects-grid {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2rem;
-    }
-
-    .project-card {
-        background: white;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s;
-        cursor: pointer;
-    }
-
-    .project-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    .project-image {
-        width: 100%;
-        height: 200px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 5rem;
-    }
-
-    .project-content {
-        padding: 1.5rem;
-    }
-
-    .project-content h3 {
-        font-size: 1.5rem;
-        color: var(--dark);
-        margin-bottom: 0.5rem;
-    }
-
-    .project-content p {
-        color: var(--gray);
-        margin-bottom: 1rem;
-    }
-
-    .project-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-    .tag {
-        padding: 0.25rem 0.75rem;
-        background: rgba(99, 102, 241, 0.1);
-        color: var(--primary);
-        border-radius: 20px;
-        font-size: 0.85rem;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .fade-in {
-        animation: fadeIn 0.6s ease-out;
-    }
-
-    @media (max-width: 768px) {
-        .hero-content {
-            grid-template-columns: 1fr;
-            text-align: center;
-        }
-
-        .hero-text h1 {
-            font-size: 2.5rem;
-        }
-
-        .hero-buttons {
-            justify-content: center;
-        }
-
-        .projects-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
-{% endblock %}
+{% block title %}{{ t.inicio }} — Desenvolvedor Full Stack{% endblock %}
 
 {% block content %}
+
+<!-- ── HERO ── -->
 <section class="hero">
-    <div class="hero-content fade-in">
-        <div class="hero-text">
-            <h1>{{ t.hero_ola }} <span class="gradient-text">{{ t.hero_titulo }}</span></h1>
-            <p>{{ t.hero_descricao }}</p>
-            <div class="hero-buttons">
-                <a href="/projetos" class="btn btn-primary">{{ t.ver_projetos }}</a>
-                <a href="/contato" class="btn btn-secondary">{{ t.entre_contato }}</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <rect x="50" y="100" width="400" height="300" rx="20" fill="url(#gradient1)" opacity="0.2"/>
-                <rect x="80" y="130" width="340" height="40" rx="5" fill="url(#gradient1)"/>
-                <rect x="80" y="190" width="200" height="20" rx="5" fill="url(#gradient1)" opacity="0.6"/>
-                <rect x="80" y="230" width="260" height="20" rx="5" fill="url(#gradient1)" opacity="0.6"/>
-                <circle cx="380" cy="350" r="60" fill="url(#gradient1)" opacity="0.3"/>
-                <path d="M 350 350 L 380 320 L 410 350 L 380 380 Z" fill="url(#gradient1)"/>
-            </svg>
-        </div>
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-grid-bg"></div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="badge badge-primary badge-dot fade-up" style="margin-bottom:1.5rem;">
+        {{ t.disponivel }}
+      </div>
+
+      <h1 class="fade-up delay-1">
+        {{ t.hero_ola }}<br>
+        <span class="text-gradient">{{ t.hero_titulo }}</span>
+      </h1>
+
+      <p class="fade-up delay-2">{{ t.hero_descricao }}</p>
+
+      <div class="hero-buttons fade-up delay-3">
+        <a href="/projetos" class="btn btn-primary btn-lg btn-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          {{ t.ver_projetos }}
+        </a>
+        <a href="/contato" class="btn btn-secondary btn-lg">{{ t.entre_contato }}</a>
+      </div>
     </div>
+
+    <!-- Hero Visual -->
+    <div class="hero-visual fade-in delay-2">
+      <div style="position:relative; width:100%; max-width:460px;">
+        <!-- Main image / código animado -->
+        <div style="background:var(--dark-2); border:1px solid var(--border-2); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-lg), var(--shadow-glow);">
+          <!-- Terminal bar -->
+          <div style="display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--border); background:var(--dark-3);">
+            <span style="width:10px;height:10px;border-radius:50%;background:#ef4444;"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#10b981;"></span>
+            <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-3); margin-left:8px;">portfolio.py</span>
+          </div>
+          <!-- Code preview -->
+          <div style="padding:1.5rem; font-family:var(--font-mono); font-size:0.8rem; line-height:1.9;">
+            <div><span style="color:#8b5cf6;">class</span> <span style="color:#6ee7b7;">Developer</span>:</div>
+            <div style="padding-left:1.5rem;"><span style="color:#94a3b8;">name</span> <span style="color:#64748b;">=</span> <span style="color:#f59e0b;">"Jorge HRP"</span></div>
+            <div style="padding-left:1.5rem;"><span style="color:#94a3b8;">stack</span> <span style="color:#64748b;">=</span> [<span style="color:#f59e0b;">"Python"</span>, <span style="color:#f59e0b;">"Flask"</span>, <span style="color:#f59e0b;">"IA"</span>]</div>
+            <div style="padding-left:1.5rem;"><span style="color:#94a3b8;">focus</span> <span style="color:#64748b;">=</span> <span style="color:#f59e0b;">"Automação"</span></div>
+            <div>&nbsp;</div>
+            <div><span style="color:#8b5cf6;">def</span> <span style="color:#6366f1;">solve</span>(problem):</div>
+            <div style="padding-left:1.5rem;"><span style="color:#8b5cf6;">return</span> <span style="color:#f59e0b;">"resultado real"</span></div>
+          </div>
+        </div>
+
+        <!-- Floating card 1 -->
+        <div class="hero-stat hero-stat--1">
+          <div class="hero-stat-label">status</div>
+          <div class="hero-stat-value">
+            <span style="display:inline-block;width:7px;height:7px;background:#10b981;border-radius:50%;margin-right:5px;animation:pulse-dot 2s infinite;"></span>
+            online
+          </div>
+        </div>
+
+        <!-- Floating card 2 -->
+        <div class="hero-stat hero-stat--2">
+          <div class="hero-stat-label">projetos</div>
+          <div class="hero-stat-value"><span>8+</span> entregues</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="featured-projects">
-    <div class="section-header fade-in">
-        <h2>{{ t.projetos_destaque }}</h2>
-        <p>{{ t.projetos_subtitulo }}</p>
+<!-- ── PROJETOS DESTAQUE ── -->
+<section class="section-pad" style="background:var(--dark-2); border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="section-header section-header--center reveal">
+      <span class="section-label">// {{ t.projetos_destaque }}</span>
+      <h2>{{ t.projetos_subtitulo }}</h2>
+      <p class="section-desc">{{ t.colecao_trabalhos }}</p>
     </div>
-    <div class="projects-grid">
-        {% for projeto in projetos %}
-        <div class="project-card fade-in" style="animation-delay: {{ loop.index0 * 0.1 }}s" onclick="window.location.href='/projetos'">
-            <div class="project-image">{{ projeto.icone }}</div>
-            <div class="project-content">
-                <h3>{{ projeto.titulo }}</h3>
-                <p>{{ projeto.descricao }}</p>
-                <div class="project-tags">
-                    {% for tech in projeto.tecnologias[:3] %}
-                    <span class="tag">{{ tech }}</span>
-                    {% endfor %}
-                </div>
+
+    <div class="grid-auto">
+      {% for projeto in projetos %}
+      <div class="project-card reveal" style="transition-delay:{{ loop.index0 * 0.08 }}s"
+           onclick="window.location.href='/projeto/{{ projeto.id }}'">
+
+        <div class="project-image">
+          {% if projeto.imagem %}
+            <img src="{{ url_for('static', filename='images/' + projeto.imagem) }}"
+                 alt="{{ projeto.titulo }}" loading="lazy">
+          {% else %}
+            <div class="project-image-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
             </div>
+          {% endif %}
         </div>
-        {% endfor %}
+
+        <div class="project-content">
+          <h3>{{ projeto.titulo }}</h3>
+          <p>{{ projeto.descricao }}</p>
+          <div class="tags">
+            {% for tech in projeto.tecnologias[:3] %}
+              <span class="tag">{{ tech }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
+
+    <div style="text-align:center; margin-top:3rem;" class="reveal">
+      <a href="/projetos" class="btn btn-secondary btn-icon">
+        {{ t.ver_todos }}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
 </section>
+
 {% endblock %}

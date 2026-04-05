@@ -2,11 +2,162 @@ import os
 import requests
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from datetime import datetime
-from translations import get_translation
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "chave-super-secreta")
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+
+# ============================================================
+# TRADUCOES — PT-BR e EN
+# ============================================================
+TRADUCOES = {
+    "pt-br": {
+        "inicio":               "Início",
+        "projetos":             "Projetos",
+        "sobre":                "Sobre",
+        "contato":              "Contato",
+        "entre_contato":        "Falar sobre um projeto",
+        "todos_direitos":       "Todos os direitos reservados",
+        "privacidade":          "Privacidade",
+        "ver_todos":            "Ver todos os projetos",
+        "disponivel":           "Disponível para novos projetos",
+        "fechar":               "Fechar",
+        "hero_ola":             "Olá, sou",
+        "hero_titulo":          "Especialista em IA e Automações",
+        "hero_descricao":       "Construo produtos digitais orientados a resultado — automação, sistemas web, dashboards e integrações. Sempre com foco no problema real por trás do pedido.",
+        "ver_projetos":         "Ver Projetos",
+        "projetos_destaque":    "Projetos em Destaque",
+        "projetos_subtitulo":   "Do conceito ao ar, sem enrolação",
+        "colecao_trabalhos":    "Soluções reais entregues para negócios reais",
+        "meus_projetos":        "Todos os Projetos",
+        "mencao_honrosa":       "Outros Projetos",
+        "mencao_subtitulo":     "Mais trabalhos entregues",
+        "filtro_todos":         "Todos",
+        "filtro_ia":            "Inteligência Artificial",
+        "filtro_automacao":     "Automação",
+        "filtro_web":           "Web & Sistemas",
+        "ver_detalhes":         "Ver Detalhes",
+        "tecnologias":          "Tecnologias",
+        "voltar_projetos":      "Voltar aos projetos",
+        "sobre_projeto":        "Sobre o Projeto",
+        "problema_resolvido":   "O Problema",
+        "solucao_implementada": "A Solução",
+        "resultados":           "Resultado",
+        "principais_funcionalidades": "Funcionalidades",
+        "como_funciona":        "Como Funciona",
+        "ver_codigo":           "Ver no GitHub",
+        "sobre_mim":            "Sobre",
+        "conheca_trajetoria":   "Especialidades e experiência",
+        "dev_apaixonado":       "Especialista em IA e Automações",
+        "sobre_texto1":         "Construo produtos digitais orientados a resultado. Não entrego código, entrego o que o cliente precisa que funcione.",
+        "sobre_texto2":         "Experiência com automação via WhatsApp, bots com IA, dashboards em tempo real, APIs REST e sistemas web completos.",
+        "sobre_texto3":         "Trabalho com negócios de diferentes setores — o que me deu visão prática de como tecnologia pode ser simples e eficaz ao mesmo tempo.",
+        "projetos_ia":          "Projetos IA",
+        "automacoes_n8n":       "Automações",
+        "anos_experiencia":     "Anos",
+        "satisfacao_cliente":   "Clientes",
+        "minhas_habilidades":   "Especialidades",
+        "entre_contato_titulo": "Vamos construir algo juntos",
+        "trabalhar_juntos":     "Sem compromisso, sem pitch de vendas — só uma conversa direta sobre o que precisas resolver.",
+        "vamos_conversar":      "Enviar Mensagem",
+        "vamos_conversar_texto": "Especializado em IA, automações e sistemas web. Vamos conversar sobre o seu projeto.",
+        "email":                "Email",
+        "telefone":             "WhatsApp",
+        "localizacao":          "Localização",
+        "disponibilidade":      "Disponibilidade",
+        "segunda_sexta":        "Seg–Sex, 9h–18h",
+        "envie_mensagem":       "Envie uma Mensagem",
+        "nome_completo":        "Nome",
+        "seu_nome":             "Como posso te chamar?",
+        "seu_email":            "seu@email.com",
+        "assunto":              "Assunto",
+        "como_posso_ajudar":    "Como posso ajudar?",
+        "mensagem":             "Mensagem",
+        "conte_projeto":        "Qual é o gargalo do seu negócio?",
+        "enviar_mensagem":      "Enviar Mensagem",
+        "mensagem_enviada":     "Mensagem enviada com sucesso!",
+        "erro_enviar":          "Erro ao enviar. Tente novamente.",
+        "pagina_nao_encontrada": "Página não encontrada",
+        "ops_pagina":           "Esta página não existe.",
+        "voltar_home":          "Voltar ao início",
+        "cookie_texto":         "Utilizamos cookies para melhorar sua experiência.",
+        "cookie_aceitar":       "Aceitar",
+        "cookie_recusar":       "Recusar",
+    },
+    "en": {
+        "inicio":               "Home",
+        "projetos":             "Projects",
+        "sobre":                "About",
+        "contato":              "Contact",
+        "entre_contato":        "Let's talk",
+        "todos_direitos":       "All rights reserved",
+        "privacidade":          "Privacy",
+        "ver_todos":            "View all projects",
+        "disponivel":           "Available for new projects",
+        "fechar":               "Close",
+        "hero_ola":             "Hi, I'm",
+        "hero_titulo":          "AI & Automation Expert",
+        "hero_descricao":       "I build result-driven digital products — automation, web systems, dashboards and integrations. Always focused on the real problem behind the request.",
+        "ver_projetos":         "View Projects",
+        "projetos_destaque":    "Featured Projects",
+        "projetos_subtitulo":   "From concept to production, no fluff",
+        "colecao_trabalhos":    "Real solutions delivered for real businesses",
+        "meus_projetos":        "All Projects",
+        "mencao_honrosa":       "More Projects",
+        "mencao_subtitulo":     "More delivered work",
+        "filtro_todos":         "All",
+        "filtro_ia":            "Artificial Intelligence",
+        "filtro_automacao":     "Automation",
+        "filtro_web":           "Web & Systems",
+        "ver_detalhes":         "View Details",
+        "tecnologias":          "Technologies",
+        "voltar_projetos":      "Back to projects",
+        "sobre_projeto":        "About the Project",
+        "problema_resolvido":   "The Problem",
+        "solucao_implementada": "The Solution",
+        "resultados":           "Result",
+        "principais_funcionalidades": "Features",
+        "como_funciona":        "How It Works",
+        "ver_codigo":           "View on GitHub",
+        "sobre_mim":            "About",
+        "conheca_trajetoria":   "Skills & experience",
+        "dev_apaixonado":       "AI & Automation Expert",
+        "sobre_texto1":         "I build result-driven digital products. I don't deliver code, I deliver what the client needs to work.",
+        "sobre_texto2":         "Experience with WhatsApp automation, AI bots, real-time dashboards, REST APIs and full web systems.",
+        "sobre_texto3":         "I work with businesses across different sectors — which gave me practical insight into how technology can be simple and effective at the same time.",
+        "projetos_ia":          "AI Projects",
+        "automacoes_n8n":       "Automations",
+        "anos_experiencia":     "Years",
+        "satisfacao_cliente":   "Clients",
+        "minhas_habilidades":   "Skills",
+        "entre_contato_titulo": "Let's build something together",
+        "trabalhar_juntos":     "No commitment, no sales pitch — just a direct conversation about what you need to solve.",
+        "vamos_conversar":      "Send Message",
+        "vamos_conversar_texto": "Specialized in AI, automation and web systems. Let's talk about your project.",
+        "email":                "Email",
+        "telefone":             "WhatsApp",
+        "localizacao":          "Location",
+        "disponibilidade":      "Availability",
+        "segunda_sexta":        "Mon–Fri, 9am–6pm",
+        "envie_mensagem":       "Send a Message",
+        "nome_completo":        "Name",
+        "seu_nome":             "Your name",
+        "seu_email":            "your@email.com",
+        "assunto":              "Subject",
+        "como_posso_ajudar":    "How can I help?",
+        "mensagem":             "Message",
+        "conte_projeto":        "What's the bottleneck in your business?",
+        "enviar_mensagem":      "Send Message",
+        "mensagem_enviada":     "Message sent successfully!",
+        "erro_enviar":          "Error sending. Please try again.",
+        "pagina_nao_encontrada": "Page not found",
+        "ops_pagina":           "This page does not exist.",
+        "voltar_home":          "Back to home",
+        "cookie_texto":         "We use cookies to improve your experience.",
+        "cookie_aceitar":       "Accept",
+        "cookie_recusar":       "Decline",
+    }
+}
 
 # ============================================================
 # PROJETOS DESTAQUE — 6 com modal completo
@@ -111,9 +262,9 @@ PROJETOS = [
 ]
 
 # ============================================================
-# MAIS PROJETOS — projetos menores, sem modal
+# MENCOES HONROSAS — 14 projetos menores, sem modal
 # ============================================================
-MAIS_PROJETOS = [
+MENCOES = [
     {
         "titulo": "Estratégia Digital — Tecidos América",
         "descricao": "Presença digital B2B para empresa têxtil. Posicionamento, conteúdo e página construídos para captação no mercado certo.",
@@ -143,6 +294,12 @@ MAIS_PROJETOS = [
         "descricao": "Painel de acompanhamento de métricas de conteúdo digital — alcance, engajamento e conversões.",
         "tecnologias": ["Python", "Flask", "JavaScript"],
         "categoria": ["web", "ia"],
+    },
+    {
+        "titulo": "Estratégia Digital — Tecidos América",
+        "descricao": "Presença digital B2B para empresa têxtil. Página institucional com catálogo e captação de clientes.",
+        "tecnologias": ["HTML", "CSS", "JavaScript"],
+        "categoria": ["web"],
     },
     {
         "titulo": "Evolution API Railway",
@@ -205,6 +362,10 @@ HABILIDADES = {
 # ============================================================
 # HELPERS
 # ============================================================
+def get_translation():
+    lang = session.get("lang", "pt-br")
+    return TRADUCOES.get(lang, TRADUCOES["pt-br"])
+
 def lang_check():
     session.setdefault("lang", "pt-br")
 
@@ -218,15 +379,14 @@ def index():
 
 @app.route("/set-language/<lang>")
 def set_language(lang):
-    from translations import get_translation as _gt
-    if lang in ("pt-br", "en"):
+    if lang in TRADUCOES:
         session["lang"] = lang
     return redirect(request.referrer or url_for("home"))
 
 @app.route("/home")
 def home():
     lang_check()
-    return render_template("index.html", projetos=PROJETOS[:3], t=get_translation(session["lang"]))
+    return render_template("index.html", projetos=PROJETOS[:3], t=get_translation())
 
 @app.route("/projetos")
 def projetos():
@@ -234,8 +394,8 @@ def projetos():
     return render_template(
         "projetos.html",
         projetos=PROJETOS,
-        mais_projetos=MAIS_PROJETOS,
-        t=get_translation(session["lang"])
+        mencoes=MENCOES,
+        t=get_translation()
     )
 
 @app.route("/projeto/<int:projeto_id>")
@@ -244,17 +404,17 @@ def projeto_detalhe(projeto_id):
     projeto = next((p for p in PROJETOS if p["id"] == projeto_id), None)
     if not projeto:
         return redirect(url_for("projetos"))
-    return render_template("projeto_detalhe.html", projeto=projeto, t=get_translation(session["lang"]))
+    return render_template("projeto_detalhe.html", projeto=projeto, t=get_translation())
 
 @app.route("/sobre")
 def sobre():
     lang_check()
-    return render_template("sobre.html", habilidades=HABILIDADES, t=get_translation(session["lang"]))
+    return render_template("sobre.html", habilidades=HABILIDADES, t=get_translation())
 
 @app.route("/contato", methods=["GET", "POST"])
 def contato():
     lang_check()
-    t = get_translation(session["lang"])
+    t = get_translation()
     if request.method == "POST":
         dados = {
             "nome":     request.form.get("nome"),
@@ -278,17 +438,17 @@ def contato():
 @app.route("/cookies")
 def cookies():
     lang_check()
-    return render_template("cookies.html", t=get_translation(session["lang"]))
+    return render_template("cookies.html", t=get_translation())
 
 @app.route("/privacidade")
 def privacidade():
     lang_check()
-    return render_template("privacidade.html", t=get_translation(session["lang"]))
+    return render_template("privacidade.html", t=get_translation())
 
 @app.errorhandler(404)
 def page_not_found(e):
     lang_check()
-    return render_template("404.html", t=get_translation(session["lang"])), 404
+    return render_template("404.html", t=get_translation()), 404
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)), debug=True)

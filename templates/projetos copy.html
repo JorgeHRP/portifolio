@@ -69,17 +69,17 @@
   </div>
 </section>
 
-<!-- ── MAIS PROJETOS ── -->
+<!-- ── MENÇÃO HONROSA ── -->
 <section style="padding:4rem 0 6rem; border-top:1px solid var(--border);">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-label">// {{ t.mais_projetos | lower }}</span>
-      <h2>{{ t.mais_projetos }}</h2>
-      <p class="section-desc">{{ t.mais_projetos_subtitulo }}</p>
+      <span class="section-label">// outros projetos</span>
+      <h2>{{ t.mencao_honrosa }}</h2>
+      <p class="section-desc">{{ t.mencao_subtitulo }}</p>
     </div>
 
     <div id="mencao-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:1rem;">
-      {% for m in mais_projetos %}
+      {% for m in mencoes %}
       <div class="reveal"
            data-mencao-cats="{{ m.categoria | join(',') }}"
            style="background:var(--dark-2); border:1px solid var(--border);
@@ -186,8 +186,10 @@
 
 {% block extra_js %}
 <script>
+// ── dados vindos do servidor, já em string segura ──
 const projetos = {{ projetos | tojson | safe }};
 
+// ── labels i18n vindos do Jinja (resolvem o bug de inglês) ──
 const i18n = {
   problema:     "{{ t.problema_resolvido }}",
   solucao:      "{{ t.solucao_implementada }}",
@@ -198,7 +200,7 @@ const i18n = {
   fechar:       "{{ t.fechar }}",
 };
 
-// ── Filtros (afectam destaque + mais projetos) ──
+// ── Filtros (afectam destaque + menção) ──
 document.querySelectorAll('.filter-tab').forEach(btn => {
   btn.addEventListener('click', function () {
     document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
@@ -222,6 +224,7 @@ function openModal(idx) {
   const p = projetos[idx];
   if (!p) return;
 
+  // Imagem
   const imgEl = document.getElementById('modalImg');
   imgEl.innerHTML = p.imagem
     ? `<img src="/static/images/${p.imagem}" alt="${p.titulo}" style="width:100%;height:100%;object-fit:cover;">`
@@ -237,6 +240,7 @@ function openModal(idx) {
   document.getElementById('modalComo').textContent      = p.como_funciona;
   document.getElementById('modalGithub').href           = p.github;
 
+  // Labels i18n
   document.getElementById('labelProblema').textContent = i18n.problema;
   document.getElementById('labelSolucao').textContent  = i18n.solucao;
   document.getElementById('labelFunc').textContent     = i18n.funcoes;
