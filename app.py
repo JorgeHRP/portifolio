@@ -290,5 +290,5 @@ def page_not_found(e):
     lang_check()
     return render_template("404.html", t=get_translation(session["lang"])), 404
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)), debug=True)
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0', port=5000)
