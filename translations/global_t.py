@@ -28,6 +28,10 @@ GLOBAL = {
         "pagina_nao_encontrada": "Página não encontrada",
         "ops_pagina":            "Esta página não existe.",
         "voltar_home":           "Voltar ao início",
+
+        # Meta
+        "site_titulo":       "Desenvolvedor Full Stack",
+        "meta_descricao":    "Desenvolvedor Full Stack especializado em IA, automações e sistemas web.",
     },
     "en": {
         # Nav
@@ -55,5 +59,9 @@ GLOBAL = {
         "pagina_nao_encontrada": "Page not found",
         "ops_pagina":            "This page does not exist.",
         "voltar_home":           "Back to home",
+
+        # Meta
+        "site_titulo":       "Full Stack Developer",
+        "meta_descricao":    "Full Stack Developer specialized in AI, automation and web systems.",
     },
 }

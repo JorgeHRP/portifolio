@@ -11,6 +11,8 @@ HOME = {
         "projetos_subtitulo":   "Do conceito ao ar, sem enrolação",
         "colecao_trabalhos":    "Soluções reais entregues para negócios reais",
         "ver_todos":            "Ver todos os projetos",
+        "hero_stat_projetos":   "projetos",
+        "hero_stat_entregues":  "entregues",
     },
     "en": {
         "disponivel":           "Available for new projects",
@@ -21,5 +23,7 @@ HOME = {
         "projetos_subtitulo":   "From concept to production, no fluff",
         "colecao_trabalhos":    "Real solutions delivered for real businesses",
         "ver_todos":            "View all projects",
+        "hero_stat_projetos":   "projects",
+        "hero_stat_entregues":  "delivered",
     },
 }

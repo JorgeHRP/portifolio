@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}404 — Página não encontrada{% endblock %}
+{% block title %}404 — {{ t.pagina_nao_encontrada }}{% endblock %}
 
 {% block content %}
 
@@ -31,7 +31,7 @@
       <div style="padding:1.5rem; font-family:var(--font-mono); font-size:0.82rem; line-height:2; text-align:left;">
         <div><span style="color:var(--primary-light);">$</span> <span style="color:var(--text-2);">GET</span> <span style="color:var(--text);">{{ request.path }}</span></div>
         <div><span style="color:#ef4444;">Error 404:</span> <span style="color:var(--text-2);">route not found</span></div>
-        <div><span style="color:var(--text-3);"># Esta página não existe.</span></div>
+        <div><span style="color:var(--text-3);"># {{ t.ops_pagina }}</span></div>
         <div style="margin-top:0.5rem;">
           <span style="color:var(--primary-light);">$</span>
           <span style="color:var(--text-2);"> cd </span>

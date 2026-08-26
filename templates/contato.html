@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ t.contato }} — Desenvolvedor Full Stack{% endblock %}
+{% block title %}{{ t.contato }} — {{ t.site_titulo }}{% endblock %}
 
 {% block content %}
 
@@ -74,7 +74,7 @@
 
         <form method="POST" action="/contato" style="display:flex; flex-direction:column; gap:1.25rem;">
 
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-row-2">
             <div class="form-group">
               <label for="nome">{{ t.nome_completo }}</label>
               <input type="text" id="nome" name="nome" required placeholder="{{ t.seu_nome }}">

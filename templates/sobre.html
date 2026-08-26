@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ t.sobre_mim }} — Desenvolvedor Full Stack{% endblock %}
+{% block title %}{{ t.sobre_mim }} — {{ t.site_titulo }}{% endblock %}
 
 {% block content %}
 
@@ -15,24 +15,21 @@
 <!-- Bio -->
 <section class="section-pad">
   <div class="container">
-    <div style="display:grid; grid-template-columns:1fr 1.6fr; gap:5rem; align-items:center;" class="reveal">
+    <div class="about-bio reveal">
 
       <!-- Foto -->
-      <div style="position:relative;">
+      <div class="about-photo" style="position:relative;">
         <div style="border-radius:var(--radius-xl); overflow:hidden; border:1px solid var(--border-2); box-shadow:var(--shadow-lg), var(--shadow-glow);">
           <img src="{{ url_for('static', filename='images/foto-jorge.jpg') }}"
                alt="Jorge HRP"
                style="width:100%; display:block; aspect-ratio:1/1; object-fit:cover;">
         </div>
         <!-- Badge flutuante -->
-        <div style="position:absolute; bottom:-1rem; right:-1rem;
-                    background:var(--dark-2); border:1px solid var(--border-2);
-                    border-radius:var(--radius-md); padding:12px 18px;
-                    box-shadow:var(--shadow-md);">
+        <div class="profile-badge">
           <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-3);margin-bottom:2px;">status</div>
           <div style="font-size:0.9rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px;">
             <span style="width:7px;height:7px;background:#10b981;border-radius:50%;animation:pulse-dot 2s infinite;"></span>
-            disponível
+            {{ t.disponivel_badge }}
           </div>
         </div>
       </div>
@@ -40,14 +37,14 @@
       <!-- Texto -->
       <div>
         <h2 style="margin-bottom:1.5rem;">
-          Construo o que o cliente<br>
-          <span class="text-gradient">precisa que funcione.</span>
+          {{ t.sobre_heading_1 }}<br>
+          <span class="text-gradient">{{ t.sobre_heading_2 }}</span>
         </h2>
         <p style="margin-bottom:1rem;">{{ t.sobre_texto1 }}</p>
         <p style="margin-bottom:1rem;">{{ t.sobre_texto2 }}</p>
         <p style="margin-bottom:2rem;">{{ t.sobre_texto3 }}</p>
 
-        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <div class="about-cta">
           <a href="/projetos" class="btn btn-primary btn-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
             {{ t.ver_projetos }}
@@ -110,8 +107,8 @@
 <section style="padding:5rem 0; border-top:1px solid var(--border);">
   <div class="container" style="text-align:center;">
     <div class="reveal">
-      <span class="section-label">// próximo passo</span>
-      <h2 style="margin-bottom:1rem;">Tem um projeto em mente?</h2>
+      <span class="section-label">// {{ t.proximo_passo }}</span>
+      <h2 style="margin-bottom:1rem;">{{ t.projeto_em_mente }}</h2>
       <p class="section-desc" style="margin:0 auto 2rem;">
         {{ t.trabalhar_juntos }}
       </p>
@@ -120,4 +117,36 @@
   </div>
 </section>
 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function animateCounter(el) {
+    const text = el.textContent.trim();
+    const match = text.match(/^(\d+)(.*)$/);
+    if (!match) return;
+    const target = parseInt(match[1], 10);
+    const suffix = match[2];
+    const duration = 1200;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const statObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.stat-number').forEach(animateCounter);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.stats-row').forEach(row => statObserver.observe(row));
+</script>
 {% endblock %}

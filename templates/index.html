@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ t.inicio }} — Desenvolvedor Full Stack{% endblock %}
+{% block title %}{{ t.inicio }} — {{ t.site_titulo }}{% endblock %}
 
 {% block content %}
 
@@ -44,7 +44,7 @@
             <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-3); margin-left:8px;">portfolio.py</span>
           </div>
           <!-- Code preview -->
-          <div style="padding:1.5rem; font-family:var(--font-mono); font-size:0.8rem; line-height:1.9;">
+          <div class="hero-code">
             <div><span style="color:#8b5cf6;">class</span> <span style="color:#6ee7b7;">Developer</span>:</div>
             <div style="padding-left:1.5rem;"><span style="color:#94a3b8;">name</span> <span style="color:#64748b;">=</span> <span style="color:#f59e0b;">"Jorge HRP"</span></div>
             <div style="padding-left:1.5rem;"><span style="color:#94a3b8;">stack</span> <span style="color:#64748b;">=</span> [<span style="color:#f59e0b;">"Python"</span>, <span style="color:#f59e0b;">"Flask"</span>, <span style="color:#f59e0b;">"IA"</span>]</div>
@@ -66,8 +66,8 @@
 
         <!-- Floating card 2 -->
         <div class="hero-stat hero-stat--2">
-          <div class="hero-stat-label">projetos</div>
-          <div class="hero-stat-value"><span>40+</span> entregues</div>
+          <div class="hero-stat-label">{{ t.hero_stat_projetos }}</div>
+          <div class="hero-stat-value"><span>40+</span> {{ t.hero_stat_entregues }}</div>
         </div>
       </div>
     </div>
@@ -121,4 +121,17 @@
   </div>
 </section>
 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const heroEl = document.querySelector('.hero');
+  if (heroEl && window.matchMedia('(hover: hover)').matches) {
+    heroEl.addEventListener('mousemove', (e) => {
+      const r = heroEl.getBoundingClientRect();
+      heroEl.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      heroEl.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  }
+</script>
 {% endblock %}
