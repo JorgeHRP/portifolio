@@ -49,7 +49,7 @@ LEGAL = {
         "priv_alteracoes":          "Alterações a esta política",
         "priv_alteracoes_texto":    "Esta política pode ser atualizada periodicamente. Alterações significativas serão comunicadas através deste site. A data de última atualização está sempre indicada no topo da página.",
         "priv_autoridade":          "Autoridade de supervisão",
-        "priv_autoridade_texto":    "Se considerar que o tratamento dos seus dados viola o RGPD, tem o direito de apresentar reclamação à CNPD — Comissão Nacional de Proteção de Dados (Portugal), ou à ANPD (Brasil).",
+        "priv_autoridade_texto":    "Se considerar que o tratamento dos seus dados viola o RGPD, tem o direito de apresentar reclamação à CNPD (Comissão Nacional de Proteção de Dados, Portugal), ou à ANPD (Brasil).",
         "priv_ver_cookies":         "Ver Política de Cookies",
         "priv_voltar":              "Voltar ao início",
 
@@ -125,7 +125,7 @@ LEGAL = {
         "priv_alteracoes":          "Changes to this policy",
         "priv_alteracoes_texto":    "This policy may be updated periodically. Significant changes will be communicated through this site. The last updated date is always shown at the top of the page.",
         "priv_autoridade":          "Supervisory authority",
-        "priv_autoridade_texto":    "If you believe the processing of your data infringes the GDPR, you have the right to lodge a complaint with the CNPD — National Data Protection Commission (Portugal), or the ANPD (Brazil).",
+        "priv_autoridade_texto":    "If you believe the processing of your data infringes the GDPR, you have the right to lodge a complaint with the CNPD (National Data Protection Commission, Portugal), or the ANPD (Brazil).",
         "priv_ver_cookies":         "View Cookie Policy",
         "priv_voltar":              "Back to home",
 

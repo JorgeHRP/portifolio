@@ -62,6 +62,9 @@ ul, ol { list-style: none; }
   --space-3xl: 4rem;
   --space-4xl: 6rem;
 
+  /* Mobile tab bar */
+  --mobile-tabbar-h: 60px;
+
   /* Radius */
   --radius-sm:  6px;
   --radius-md:  10px;
@@ -227,7 +230,7 @@ section { position: relative; }
 .gap-lg { gap: var(--space-lg); }
 
 /* ── NAV ── */
-nav {
+#navbar {
   position: fixed;
   top: 0;
   width: 100%;
@@ -240,7 +243,7 @@ nav {
               box-shadow var(--duration) var(--ease);
 }
 
-nav.scrolled {
+#navbar.scrolled {
   background: rgba(8, 12, 20, 0.97);
   box-shadow: 0 1px 0 var(--border-2), var(--shadow-md);
 }
@@ -395,6 +398,21 @@ nav.scrolled {
   border-color: var(--primary);
   color: var(--primary-light);
   background: rgba(99,102,241,0.06);
+}
+
+/* Stronger outline CTA — used for "let's talk" style buttons that sit
+   next to a btn-primary and need to read as more than a faded outline */
+.btn-outline-accent {
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.45);
+  color: var(--primary-light);
+}
+
+.btn-outline-accent:hover {
+  border-color: var(--primary);
+  background: rgba(99,102,241,0.16);
+  color: var(--primary-light);
+  transform: translateY(-2px);
 }
 
 .btn-ghost {
@@ -1291,6 +1309,138 @@ main { padding-top: 68px; min-height: calc(100vh - 68px); }
 .back-to-top svg { width: 18px; height: 18px; }
 .back-to-top:hover { transform: translateY(-3px); }
 
+/* ── CONTACT FAB ──
+   Always-visible "let's talk" shortcut, independent of the mobile nav
+   menu (which hides the nav's contact link until the hamburger opens). */
+.contact-fab {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 20px 13px 15px;
+  border-radius: var(--radius-full);
+  background: var(--grad-primary);
+  color: #fff !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(99,102,241,0.35);
+  z-index: 900;
+  animation: fab-pulse 2.6s ease-in-out infinite;
+  transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+}
+
+.contact-fab svg { width: 19px; height: 19px; flex-shrink: 0; }
+
+.contact-fab:hover {
+  animation: none;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(99,102,241,0.55);
+}
+
+@keyframes fab-pulse {
+  0%, 100% { box-shadow: var(--shadow-lg), 0 0 20px rgba(99,102,241,0.35); }
+  50%      { box-shadow: var(--shadow-lg), 0 0 32px rgba(99,102,241,0.6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-fab { animation: none; }
+}
+
+/* Keep the FAB and back-to-top button clear of the cookie banner */
+.cookie-banner.visible ~ .back-to-top,
+.cookie-banner.visible ~ .contact-fab { bottom: 96px; }
+
+/* ── MOBILE TAB BAR ──
+   On small screens the primary nav lives behind the hamburger, so a
+   first-time visitor who never opens it has no way back to Home/About.
+   This bar keeps the core destinations one tap away at all times.
+   Hidden above the tablet breakpoint, where the top nav is already visible. */
+.mobile-tabbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-tabbar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 950;
+    background: rgba(8,12,20,0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-2);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .mobile-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 9px 4px 8px;
+    color: var(--text-3);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    position: relative;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .mobile-tab svg {
+    width: 21px;
+    height: 21px;
+    transition: filter var(--duration) var(--ease);
+  }
+
+  .mobile-tab.active {
+    color: var(--primary-light);
+  }
+
+  .mobile-tab.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 22px;
+    height: 2px;
+    background: var(--grad-primary);
+    border-radius: var(--radius-full);
+    transform: translateX(-50%);
+  }
+
+  .mobile-tab.active svg {
+    filter: drop-shadow(0 0 6px rgba(99,102,241,0.55));
+  }
+
+  /* Make room so the fixed tab bar never covers page content */
+  body { padding-bottom: var(--mobile-tabbar-h); }
+
+  /* The Contact tab covers this job on mobile, so the floating pill
+     would just duplicate it */
+  .contact-fab { display: none; }
+
+  .back-to-top { bottom: calc(var(--mobile-tabbar-h) + 12px); }
+
+  /* Sits just above the tab bar instead of covering it. The extra
+     tabbar-h has to be added back into the hidden offset too, otherwise
+     translateY(100%) (sized for a bottom:0 banner) undershoots and
+     leaves a sliver of the dismissed banner on screen. */
+  .cookie-banner {
+    bottom: var(--mobile-tabbar-h);
+    transform: translateY(calc(100% + var(--mobile-tabbar-h)));
+  }
+  .cookie-banner.visible { transform: translateY(0); }
+
+  .cookie-banner.visible ~ .back-to-top { opacity: 0; visibility: hidden; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .hero-content { gap: var(--space-2xl); }
@@ -1378,5 +1528,5 @@ main { padding-top: 68px; min-height: calc(100vh - 68px); }
   .project-modal-box > div:nth-child(1) { padding: 2rem 1.25rem 1.5rem !important; }
   .project-modal-box > div:nth-child(2) { padding: 1.5rem 1.25rem !important; }
 
-  .back-to-top { right: 16px; bottom: 16px; }
+  .back-to-top { right: 16px; bottom: calc(var(--mobile-tabbar-h) + 12px); }
 }

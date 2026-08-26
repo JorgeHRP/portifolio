@@ -4,7 +4,7 @@
 CONTATO = {
     "pt-br": {
         "entre_contato_titulo":  "Vamos construir algo juntos",
-        "trabalhar_juntos":      "Sem compromisso, sem pitch de vendas — só uma conversa direta sobre o que precisas resolver.",
+        "trabalhar_juntos":      "Sem compromisso, sem pitch de vendas, só uma conversa direta sobre o que precisas resolver.",
         "vamos_conversar":       "Enviar Mensagem",
         "vamos_conversar_texto": "Especializado em IA, automações e sistemas web. Vamos conversar sobre o seu projeto.",
         "email":                 "Email",
@@ -24,7 +24,7 @@ CONTATO = {
     },
     "en": {
         "entre_contato_titulo":  "Let's build something together",
-        "trabalhar_juntos":      "No commitment, no sales pitch — just a direct conversation about what you need to solve.",
+        "trabalhar_juntos":      "No commitment, no sales pitch, just a direct conversation about what you need to solve.",
         "vamos_conversar":       "Send Message",
         "vamos_conversar_texto": "Specialized in AI, automation and web systems. Let's talk about your project.",
         "email":                 "Email",

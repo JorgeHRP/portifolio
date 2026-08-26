@@ -13,7 +13,7 @@ GLOBAL = {
         # Footer
         "todos_direitos":   "Todos os direitos reservados",
         "privacidade":      "Privacidade",
-        "hero_descricao":   "Construo produtos digitais orientados a resultado — automação, sistemas web, dashboards e integrações. Sempre com foco no problema real por trás do pedido.",
+        "hero_descricao":   "Construo produtos digitais orientados a resultado: automação, sistemas web, dashboards e integrações. Sempre com foco no problema real por trás do pedido.",
 
         # Flash
         "mensagem_enviada": "Mensagem enviada com sucesso!",
@@ -44,7 +44,7 @@ GLOBAL = {
         # Footer
         "todos_direitos":   "All rights reserved",
         "privacidade":      "Privacy",
-        "hero_descricao":   "I build result-driven digital products — automation, web systems, dashboards and integrations. Always focused on the real problem behind the request.",
+        "hero_descricao":   "I build result-driven digital products: automation, web systems, dashboards and integrations. Always focused on the real problem behind the request.",
 
         # Flash
         "mensagem_enviada": "Message sent successfully!",

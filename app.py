@@ -26,8 +26,8 @@ PROJETOS = [
             "en": "Automated customer service system integrated with the Official API. Python backend with persistent session, health check and cloud deployment.",
         },
         "descricao_longa": {
-            "pt-br": "Sistema completo de atendimento via WhatsApp usando a principal API open-source do mercado. O bot mantém contexto da conversa, responde de forma humanizada e nunca cai — sessão persistente com reconexão automática e health check monitorado 24/7.",
-            "en": "Complete WhatsApp customer service system built on the market's leading open-source API. The bot keeps conversation context, replies in a human-like way and never goes down — persistent session with automatic reconnection and health check monitored 24/7.",
+            "pt-br": "Sistema completo de atendimento via WhatsApp usando a principal API open-source do mercado. O bot mantém contexto da conversa, responde de forma humanizada e nunca cai: sessão persistente com reconexão automática e health check monitorado 24/7.",
+            "en": "Complete WhatsApp customer service system built on the market's leading open-source API. The bot keeps conversation context, replies in a human-like way and never goes down: persistent session with automatic reconnection and health check monitored 24/7.",
         },
         "problema": {
             "pt-br": "O cliente perdia leads fora do horário comercial. Sem atendimento automático, mensagens ficavam sem resposta por horas.",
@@ -146,8 +146,8 @@ PROJETOS = [
             "en": "Booking platform for a service business. Customers book in under 1 minute. Eliminated manual schedule management.",
         },
         "descricao_longa": {
-            "pt-br": "Sistema de agendamento completo para barbearia. O cliente escolhe serviço, profissional e horário diretamente pelo celular — sem ligar, sem mandar mensagem. O negócio recebe confirmação automática e tem agenda sempre organizada.",
-            "en": "Complete booking system for a barbershop. The customer chooses service, professional and time directly from their phone — no calls, no messages. The business gets automatic confirmation and always has an organized schedule.",
+            "pt-br": "Sistema de agendamento completo para barbearia. O cliente escolhe serviço, profissional e horário diretamente pelo celular, sem ligar, sem mandar mensagem. O negócio recebe confirmação automática e tem agenda sempre organizada.",
+            "en": "Complete booking system for a barbershop. The customer chooses service, professional and time directly from their phone, no calls, no messages. The business gets automatic confirmation and always has an organized schedule.",
         },
         "problema": {
             "pt-br": "Gestão manual de horários por WhatsApp causava conflitos, esquecimentos e perda de clientes que desistiam de esperar resposta.",
@@ -186,8 +186,8 @@ PROJETOS = [
             "en": "Web tool with reusable blocks, automatic calculation and a layout ready to send. From hours to minutes.",
         },
         "descricao_longa": {
-            "pt-br": "Sistema de geração de orçamentos para prestadores de serviço. Blocos reutilizáveis, cálculo automático de totais, desconto e impostos — e o orçamento sai formatado e pronto para enviar ao cliente.",
-            "en": "Quote generation system for service providers. Reusable blocks, automatic calculation of totals, discounts and taxes — and the quote comes out formatted and ready to send to the client.",
+            "pt-br": "Sistema de geração de orçamentos para prestadores de serviço. Blocos reutilizáveis, cálculo automático de totais, desconto e impostos, e o orçamento sai formatado e pronto para enviar ao cliente.",
+            "en": "Quote generation system for service providers. Reusable blocks, automatic calculation of totals, discounts and taxes, and the quote comes out formatted and ready to send to the client.",
         },
         "problema": {
             "pt-br": "Criar orçamentos tomava horas: copiar de planilhas, formatar, calcular manualmente, adaptar para cada cliente.",
@@ -299,8 +299,8 @@ MAIS_PROJETOS = [
     {
         "titulo": {"pt-br": "Dashboard de Conteúdo", "en": "Content Dashboard"},
         "descricao": {
-            "pt-br": "Painel de acompanhamento de métricas de conteúdo digital — alcance, engajamento e conversões.",
-            "en": "Tracking panel for digital content metrics — reach, engagement and conversions.",
+            "pt-br": "Painel de acompanhamento de métricas de conteúdo digital: alcance, engajamento e conversões.",
+            "en": "Tracking panel for digital content metrics: reach, engagement and conversions.",
         },
         "tecnologias": ["Python", "Flask", "JavaScript"],
         "categoria": ["web", "ia"],
